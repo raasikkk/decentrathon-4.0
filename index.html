@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Recognition - Teachable Machine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <span class="navbar-brand">Made by VIP 666 Royal gold team 👑😈🔥</span>
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="navbar-link" onclick="showAboutModal()">About project</a>
+                <a href="https://github.com" class="navbar-link" target="_blank" rel="noopener noreferrer">Github Link</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">AI Image Recognition</h1>
+            <p class="subtitle">Powered by Teachable Machine</p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Sidebar - Controls -->
+            <div class="sidebar">
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-button active" onclick="switchTab('camera')" id="cameraTab">
+                        <span class="tab-icon">📷</span>
+                        <span class="tab-text">Camera</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab('file')" id="fileTab">
+                        <span class="tab-icon">📁</span>
+                        <span class="tab-text">Upload</span>
+                    </button>
+                </div>
+
+                <!-- Camera Tab Content -->
+                <div id="cameraContent" class="tab-content active">
+                    <div class="control-section">
+                        <button id="startButton" class="start-button" onclick="initCamera()">
+                            <span class="button-icon">▶️</span>
+                            Start Camera Recognition
+                        </button>
+                        
+                        <button id="stopButton" class="stop-button" onclick="stopCamera()" style="display: none;">
+                            <span class="button-icon">⏹️</span>
+                            Stop Recognition
+                        </button>
+
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            Loading model and setting up camera...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Upload Tab Content -->
+                <div id="fileContent" class="tab-content">
+                    <div class="file-upload-section">
+                        <div class="file-upload-area" id="fileUploadArea" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">📁</div>
+                            <p class="upload-text">Click to select an image file</p>
+                            <p class="upload-subtext">Supports JPG, PNG, GIF, WebP</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+                        
+                        <div class="image-preview" id="imagePreview" style="display: none;">
+                            <button class="analyze-button" onclick="analyzeImage()">
+                                <span class="button-icon">🔍</span>
+                                Analyze Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Messages -->
+                <div id="status" class="status" style="display: none;"></div>
+            </div>
+
+            <!-- Right Side - Combined Image and Results -->
+            <div class="main-panel">
+                <!-- Main Content Card -->
+                <div class="main-card">
+                    <!-- Camera Tab Content -->
+                    <div id="cameraMainContent">
+                        <!-- Camera Placeholder (when not started) -->
+                        <div class="camera-placeholder" id="cameraPlaceholder">
+                            <div class="placeholder-icon">📷</div>
+                            <h3 class="placeholder-title">Camera Recognition</h3>
+                            <p class="placeholder-text">Click "Start Camera Recognition" to begin real-time analysis</p>
+                            <div class="placeholder-features">
+                                <div class="feature-item">
+                                    <span class="feature-icon">⚡</span>
+                                    <span class="feature-text">Real-time analysis</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🎯</span>
+                                    <span class="feature-text">Instant results</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">📊</span>
+                                    <span class="feature-text">Confidence scores</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Camera Section -->
+                        <div class="active-camera-section" id="activeCameraSection" style="display: none;">
+                            <div class="camera-header">
+                                <h3 class="camera-title">Live Recognition</h3>
+                                <div class="camera-status">
+                                    <div class="status-dot"></div>
+                                    <span class="status-text">Active</span>
+                                </div>
+                            </div>
+                            <div class="camera-container">
+                                <div id="webcam-container"></div>
+                            </div>
+                        </div>
+
+                        <!-- Final Result Section (replaces camera when stopped) -->
+                        <div class="final-result-section" id="finalResultSection" style="display: none;">
+                            <div class="final-result-card">
+                                <div class="result-header">
+                                    <h3 class="final-result-title">Recognition Complete</h3>
+                                    <div class="result-badge">Final Result</div>
+                                </div>
+                                <div class="final-result-content">
+                                    <div class="result-icon">🎯</div>
+                                    <div class="result-text">
+                                        <span class="result-label">Most Recognizable:</span>
+                                        <span class="result-value" id="finalResultValue">Небитая-чистая машина</span>
+                                    </div>
+                                    <div class="result-confidence">
+                                        <span class="confidence-label">Confidence:</span>
+                                        <span class="confidence-value" id="finalResultConfidence">0.95</span>
+                                    </div>
+                                </div>
+                                <button class="restart-button" onclick="restartRecognition()">
+                                    <span class="button-icon">🔄</span>
+                                    Start New Recognition
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Tab Content -->
+                    <div id="fileMainContent" style="display: none;">
+                        <!-- File Upload Placeholder -->
+                        <div class="file-placeholder" id="filePlaceholder">
+                            <div class="placeholder-icon">📁</div>
+                            <h3 class="placeholder-title">Image Upload</h3>
+                            <p class="placeholder-text">Upload an image file to analyze it with AI</p>
+                            <div class="placeholder-features">
+                                <div class="feature-item">
+                                    <span class="feature-icon">🖼️</span>
+                                    <span class="feature-text">JPG, PNG, GIF, WebP</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">🔍</span>
+                                    <span class="feature-text">Detailed analysis</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">📈</span>
+                                    <span class="feature-text">Probability scores</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Image Section -->
+                        <div class="file-image-section" id="fileImageSection" style="display: none;">
+                            <div class="image-header">
+                                <h3 class="image-title">Uploaded Image</h3>
+                                <button class="change-image-button" onclick="document.getElementById('fileInput').click()">
+                                    <span class="button-icon">🔄</span>
+                                    Change Image
+                                </button>
+                            </div>
+                            <div class="image-container">
+                                <img id="previewImage" alt="Preview">
+                            </div>
+                            <div class="analyze-section">
+                                <button class="analyze-button" onclick="analyzeImage()">
+                                    <span class="button-icon">🔍</span>
+                                    Analyze Image
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- File Final Result Section -->
+                        <div class="file-final-result-section" id="fileFinalResultSection" style="display: none;">
+                            <div class="file-result-card">
+                                <div class="result-header">
+                                    <h3 class="final-result-title">Analysis Complete</h3>
+                                    <div class="result-badge">Final Result</div>
+                                </div>
+                                <div class="final-result-content">
+                                    <div class="result-icon">🎯</div>
+                                    <div class="result-text">
+                                        <span class="result-label">Most Recognizable:</span>
+                                        <span class="result-value" id="fileFinalResultValue">Небитая-чистая машина</span>
+                                    </div>
+                                    <div class="result-confidence">
+                                        <span class="confidence-label">Confidence:</span>
+                                        <span class="confidence-value" id="fileFinalResultConfidence">0.95</span>
+                                    </div>
+                                </div>
+                                <button class="restart-button" onclick="restartFileAnalysis()">
+                                    <span class="button-icon">🔄</span>
+                                    Analyze New Image
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Section (always visible when active) -->
+                    <div class="results-section" id="resultsSection" style="display: none;">
+                        <div class="results-header">
+                            <h3 class="results-title">Recognition Results</h3>
+                            <div class="confidence-indicator">
+                                <span class="confidence-label">Confidence</span>
+                            </div>
+                        </div>
+                        <div id="label-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">VIP 666 Royal Gold Team</h3>
+                    <p class="footer-description">Elite developers crafting the future of AI recognition technology with royal precision and golden innovation.</p>
+                    <div class="footer-badges">
+                        <span class="badge">👑 Premium Quality</span>
+                        <span class="badge">🔥 Cutting Edge</span>
+                        <span class="badge">⚡ Lightning Fast</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Project Features</h4>
+                    <ul class="footer-links">
+                        <li><span class="link-icon">🎯</span> Real-time Recognition</li>
+                        <li><span class="link-icon">📸</span> Image Upload Analysis</li>
+                        <li><span class="link-icon">🤖</span> AI-Powered Detection</li>
+                        <li><span class="link-icon">📊</span> Confidence Scoring</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Tech Stack</h4>
+                    <ul class="footer-links">
+                        <li><span class="link-icon">🧠</span> TensorFlow.js</li>
+                        <li><span class="link-icon">🎓</span> Teachable Machine</li>
+                        <li><span class="link-icon">⚛️</span> Modern JavaScript</li>
+                        <li><span class="link-icon">🎨</span> Premium UI/UX</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <span class="social-icon">🐙</span> GitHub
+                        </a>
+                        <a href="#" class="social-link" onclick="showAboutModal()">
+                            <span class="social-icon">📖</span> About
+                        </a>
+                        <a href="#" class="social-link" onclick="alert('Contact: vip666royal@example.com')">
+                            <span class="social-icon">📧</span> Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <span class="copyright-text">© 2024 VIP 666 Royal Gold Team. All rights reserved.</span>
+                    <span class="copyright-emoji">👑😈🔥</span>
+                </div>
+                <div class="footer-motto">
+                    <span class="motto-text">"Coding with Royal Precision, Delivering Golden Results"</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
