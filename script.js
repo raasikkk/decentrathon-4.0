@@ -213,7 +213,8 @@ function showStatus(message, type) {
 // Update predictions display
 function updatePredictionsDisplay(predictions) {
     for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction = predictions[i].className + ": " + predictions[i].probability.toFixed(2);
+        const percentage = (predictions[i].probability * 100).toFixed(0);
+        const classPrediction = predictions[i].className + ": " + percentage + "%";
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
 }
@@ -356,7 +357,7 @@ function showFinalResult(result) {
     
     // Update the result values
     finalResultValue.textContent = result.className;
-    finalResultConfidence.textContent = result.probability.toFixed(2);
+    finalResultConfidence.textContent = (result.probability * 100).toFixed(0) + "%";
     
     // Show the final result section
     finalResultSection.style.display = 'flex';
@@ -370,7 +371,7 @@ function showFileFinalResult(result) {
     
     // Update the result values
     fileFinalResultValue.textContent = result.className;
-    fileFinalResultConfidence.textContent = result.probability.toFixed(2);
+    fileFinalResultConfidence.textContent = (result.probability * 100).toFixed(0) + "%";
     
     // Show the file final result section
     fileFinalResultSection.style.display = 'flex';
@@ -389,9 +390,9 @@ function restartFileAnalysis() {
     document.getElementById('status').style.display = 'none';
 }
 
-// Show about modal (placeholder for future about page)
+// Navigate to about page
 function showAboutModal() {
-    alert('About project page will be created soon! This will contain detailed information about the AI Image Recognition project, its features, and technical details.');
+    window.location.href = 'about.html';
 }
 
 // Restart recognition

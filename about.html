@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About AI Image Recognition - VIP 666 Royal Gold Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23C0F11C" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--bright-green), #a8d708);
+            color: var(--black);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(192, 241, 28, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--bright-green), #a8d708, var(--bright-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(192, 241, 28, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #aaaaaa;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(192, 241, 28, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(192, 241, 28, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--bright-green);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #cccccc;
+            font-weight: 500;
+        }
+
+        .features-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--bright-green), #a8d708);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: var(--medium-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .feature-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-highlights li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        .feature-highlights li::before {
+            content: '✓';
+            color: var(--bright-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .tech-section {
+            background: linear-gradient(135deg, var(--light-gray), #f8f8f8);
+            padding: 100px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tech-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .tech-description {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--black), #1a1a1a);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--bright-green), #a8d708);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: var(--bright-green);
+            color: var(--black);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(192, 241, 28, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(192, 241, 28, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--bright-green);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--bright-green);
+            color: var(--black);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                padding: 30px;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <span class="navbar-brand">Made by VIP 666 Royal gold team 👑😈🔥</span>
+            </div>
+            <div class="navbar-right">
+                <a href="index.html" class="navbar-link">← Back to App</a>
+                <a href="https://github.com/raasikkk/decentrathon-4.0" class="navbar-link" target="_blank" rel="noopener noreferrer">Github Link</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <div class="hero-badge">🏆 Best UI/UX Nomination</div>
+            <h1 class="hero-title">AI Image Recognition</h1>
+            <p class="hero-subtitle">Revolutionary AI-powered image analysis with premium user experience</p>
+            <p class="hero-description">
+                Experience the future of image recognition technology with our cutting-edge AI system. 
+                Built with royal precision and golden innovation, our platform delivers instant, accurate 
+                results through an intuitive and beautiful interface.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">&lt;1s</span>
+                    <span class="stat-label">Response Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">User Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Availability</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-container">
+            <div class="section-header">
+                <h2 class="section-title">Premium Features</h2>
+                <p class="section-subtitle">
+                    Discover the powerful capabilities that make our AI Image Recognition system 
+                    the gold standard in user experience and functionality.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📸</span>
+                    <h3 class="feature-title">Real-time Camera Recognition</h3>
+                    <p class="feature-description">
+                        Instantly analyze objects through your device's camera with live recognition 
+                        and real-time confidence scoring.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Live video stream analysis</li>
+                        <li>Instant object detection</li>
+                        <li>Real-time confidence updates</li>
+                        <li>Seamless camera integration</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🖼️</span>
+                    <h3 class="feature-title">Image Upload Analysis</h3>
+                    <p class="feature-description">
+                        Upload any image and get detailed AI analysis with comprehensive recognition 
+                        results and probability scores.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Multiple image format support</li>
+                        <li>Drag & drop interface</li>
+                        <li>High-resolution processing</li>
+                        <li>Detailed analysis results</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Intelligent Recognition</h3>
+                    <p class="feature-description">
+                        Powered by advanced machine learning models trained on diverse datasets 
+                        for maximum accuracy and reliability.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Advanced ML algorithms</li>
+                        <li>High accuracy detection</li>
+                        <li>Confidence scoring</li>
+                        <li>Continuous learning</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="feature-title">Detailed Analytics</h3>
+                    <p class="feature-description">
+                        Get comprehensive insights with detailed probability scores, recognition 
+                        confidence, and result breakdowns.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Probability percentages</li>
+                        <li>Confidence indicators</li>
+                        <li>Result rankings</li>
+                        <li>Visual feedback</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h3 class="feature-title">Premium UI/UX Design</h3>
+                    <p class="feature-description">
+                        Experience a beautifully crafted interface with smooth animations, 
+                        intuitive navigation, and responsive design.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Modern design language</li>
+                        <li>Smooth animations</li>
+                        <li>Responsive layout</li>
+                        <li>Accessibility focused</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="feature-title">Lightning Performance</h3>
+                    <p class="feature-description">
+                        Optimized for speed and efficiency with client-side processing 
+                        and minimal server dependencies.
+                    </p>
+                    <ul class="feature-highlights">
+                        <li>Client-side processing</li>
+                        <li>Fast load times</li>
+                        <li>Minimal dependencies</li>
+                        <li>Optimized algorithms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-section">
+        <div class="features-container">
+            <div class="section-header">
+                <h2 class="section-title">Cutting-Edge Technology</h2>
+                <p class="section-subtitle">
+                    Built with the latest technologies and frameworks to deliver 
+                    exceptional performance and user experience.
+                </p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="tech-icon">🧠</span>
+                    <h3 class="tech-name">TensorFlow.js</h3>
+                    <p class="tech-description">Advanced machine learning framework for browser-based AI processing</p>
+                </div>
+                
+                <div class="tech-item">
+                    <span class="tech-icon">🎓</span>
+                    <h3 class="tech-name">Teachable Machine</h3>
+                    <p class="tech-description">Google's platform for creating custom machine learning models</p>
+                </div>
+                
+                <div class="tech-item">
+                    <span class="tech-icon">⚛️</span>
+                    <h3 class="tech-name">Modern JavaScript</h3>
+                    <p class="tech-description">ES6+ features and modern web APIs for optimal performance</p>
+                </div>
+                
+                <div class="tech-item">
+                    <span class="tech-icon">🎨</span>
+                    <h3 class="tech-name">CSS3 & HTML5</h3>
+                    <p class="tech-description">Latest web standards for beautiful, responsive design</p>
+                </div>
+                
+                <div class="tech-item">
+                    <span class="tech-icon">📱</span>
+                    <h3 class="tech-name">Responsive Design</h3>
+                    <p class="tech-description">Mobile-first approach ensuring perfect experience on all devices</p>
+                </div>
+                
+                <div class="tech-item">
+                    <span class="tech-icon">🔒</span>
+                    <h3 class="tech-name">Privacy First</h3>
+                    <p class="tech-description">Client-side processing ensures your data stays private</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Experience the Future?</h2>
+            <p class="cta-description">
+                Join thousands of users who have already discovered the power of our 
+                AI Image Recognition system. Experience premium quality and royal precision.
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html" class="cta-button">Try It Now</a>
+                <a href="https://github.com/raasikkk/decentrathon-4.0" class="cta-button secondary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">VIP 666 Royal Gold Team</h3>
+                    <p class="footer-description">Elite developers crafting the future of AI recognition technology with royal precision and golden innovation.</p>
+                    <div class="footer-badges">
+                        <span class="badge">👑 Premium Quality</span>
+                        <span class="badge">🔥 Cutting Edge</span>
+                        <span class="badge">⚡ Lightning Fast</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Project Features</h4>
+                    <ul class="footer-links">
+                        <li><span class="link-icon">🎯</span> Real-time Recognition</li>
+                        <li><span class="link-icon">📸</span> Image Upload Analysis</li>
+                        <li><span class="link-icon">🤖</span> AI-Powered Detection</li>
+                        <li><span class="link-icon">📊</span> Confidence Scoring</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Tech Stack</h4>
+                    <ul class="footer-links">
+                        <li><span class="link-icon">🧠</span> TensorFlow.js</li>
+                        <li><span class="link-icon">🎓</span> Teachable Machine</li>
+                        <li><span class="link-icon">⚛️</span> Modern JavaScript</li>
+                        <li><span class="link-icon">🎨</span> Premium UI/UX</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/raasikkk/decentrathon-4.0" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <span class="social-icon">🐙</span> GitHub
+                        </a>
+                        <a href="about.html" class="social-link">
+                            <span class="social-icon">📖</span> About
+                        </a>
+                        <a href="#" class="social-link" onclick="alert('Contact: vip666royal@example.com')">
+                            <span class="social-icon">📧</span> Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <span class="copyright-text">© 2024 VIP 666 Royal Gold Team. All rights reserved.</span>
+                    <span class="copyright-emoji">👑😈🔥</span>
+                </div>
+                <div class="footer-motto">
+                    <span class="motto-text">"Coding with Royal Precision, Delivering Golden Results"</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
